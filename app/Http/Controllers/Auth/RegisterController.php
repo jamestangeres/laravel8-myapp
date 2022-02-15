@@ -9,7 +9,12 @@ use Illuminate\Support\Facades\Hash;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class RegisterController extends Controller
-{
+{   
+    public function __construct()
+    {
+        $this->middleware(['guest']);
+    }
+
     public function index()
     {
         return view('auth.register');

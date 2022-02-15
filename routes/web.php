@@ -16,7 +16,10 @@ use App\Http\Controllers\Auth\RegisterController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard',[DashboardController::class, 'index'])
+    ->name('dashboard');
+    // ->middleware('auth');
+
 Route::get('/', function (){
     return view('home');
 })->name('home');
