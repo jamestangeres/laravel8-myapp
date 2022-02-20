@@ -34,3 +34,8 @@ Route::get('/register',[RegisterController::class, 'index'])->name('register');
 Route::post('/register',[RegisterController::class, 'store']);
 
 Route::get('/posts',[PostController::class, 'index'])->name('posts');
+
+
+Route::any('/greeting', function () {
+    return 'Hello world';
+});
