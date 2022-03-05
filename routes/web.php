@@ -37,7 +37,7 @@ Route::post('/register',[RegisterController::class, 'store']);
 Route::get('/posts',[PostController::class, 'index'])->name('posts');
 
 Route::get('/employee', [EmployeeController::class, 'showEmployees']);
-Route::get('/employee/pdf', [EmployeeController::class, 'pdfDownload'])->name('pdf-download');
+Route::get('/employee/pdf', [EmployeeController::class, 'downloadPDF'])->name('pdf-download');
 
 
 Route::any('/greeting', function () {
