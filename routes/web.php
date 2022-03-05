@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -35,7 +36,18 @@ Route::post('/register',[RegisterController::class, 'store']);
 
 Route::get('/posts',[PostController::class, 'index'])->name('posts');
 
+Route::get('/employee', [EmployeeController::class, 'showEmployees']);
+Route::get('/employee/pdf', [EmployeeController::class, 'pdfDownload'])->name('pdf-download');
+
 
 Route::any('/greeting', function () {
     return 'Hello world';
 });
+
+//get the github controller
+Route::get('/github', [\App\Http\Controllers\GithubController::class, 'index']);
+
+Route::get('phpinfo', function(){
+	phpinfo();
+});
+
