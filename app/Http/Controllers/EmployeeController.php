@@ -2,12 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\DomPdf;
 use App\Models\Employee;
+use Illuminate\Http\Request;
 use PDF;
-use Illuminate\Support\Facades\Storage;
+
+//use TCPDF;
+
 
 class EmployeeController extends Controller
 {
+    
+    protected DomPdf $dompdf;
+
+    /**
+     * @param $dompdf
+     */
+  
+
     public function showEmployees()
     {
         $employee = Employee::all();
@@ -16,7 +28,7 @@ class EmployeeController extends Controller
 
     //Generate PDF
 
-    public function downloadPDF()
+    public function downloadPdf()
     {
 
         // retreive all records from db
@@ -29,14 +41,26 @@ class EmployeeController extends Controller
         // share data to view
         view()->share('employee',$data);
         $pdf = PDF::loadView('pdf.pdf-download', $data);
+        return $pdf->downloadMe('invASDFASDFoice.pdf' , 'D');
 
-        //download PDF file with download method
-        return $pdf->download('pdf_file.pdf');
-
-//        $path= 'public\pdf\sdfsdf.pdf';
-//        Storage::put($path, $contents);
-//        $pdf = Storage::disk('local')->path($path);
-//        return response()->download($pdf);
-
+//        $this->downloadMe($pdf, 'D');
+//        PDF::Output('hello_world.pdf', 'D');
     }
+
+    public function tcpdfDownload()
+    {
+        // retreive all records from db
+        $data = Employee::all();
+
+        $data = [
+            'employees' => $data
+        ];
+
+        TCPDF::SetTitle('Hello World');
+        TCPDF::AddPage();
+        TCPDF::Write(0, 'Hello World');
+        TCPDF::Output('hello_world.pdf');
+    }
+
+
 }
