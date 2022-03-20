@@ -26,7 +26,6 @@ class EmployeeController extends Controller
         return view('pdf.index', compact('employee'));
     }
 
-    //Generate PDF
 
     public function downloadPdf()
     {
@@ -43,8 +42,6 @@ class EmployeeController extends Controller
         $pdf = PDF::loadView('pdf.pdf-download', $data);
         return $pdf->downloadMe('invASDFASDFoice.pdf' , 'D');
 
-//        $this->downloadMe($pdf, 'D');
-//        PDF::Output('hello_world.pdf', 'D');
     }
 
     public function tcpdfDownload()
